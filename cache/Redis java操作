@@ -1,0 +1,49 @@
+Redis
+http://www.runoob.com/redis/redis-tutorial.html
+
+下载解压
+1 server端：打开一个cmd 切换路径，运行 redis-server.exe redis.windows.conf
+
+2：客户端：另外打开一个cmd，切换目录 ，运行 redis-cli.exe -h 127.0.0.1 -p 6379 
+
+
+3 数据类型
+Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+
+set key value
+get key
+hmset sss f1 9 给sss对象的f1字段赋值为9
+
+4 发布订阅
+SUBSCRIBE redisChat
+PUBLISH redisChat "Redis is a great caching technique"
+
+5 java redis
+<dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+
+6 public static void main(String[] args){
+		Jedis jedis = new Jedis("localhost");
+		System.out.println("redis:" + jedis.ping());
+		
+		jedis.set("redisstatus", "new learn");
+		System.out.println(jedis.get("redisstatus"));
+		
+		jedis.lpush("names", "ada");
+		jedis.lpush("names", "qingfeng");
+		jedis.lpush("names", "zuo");
+		jedis.lpush("names", "you");
+		List<String> list = jedis.lrange("names", 0, 4);
+		for(int i = 0; i < list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		
+		Set<String> keys = jedis.keys("*"); 
+        Iterator<String> it=keys.iterator() ;   
+        while(it.hasNext()){   
+            String key = it.next();   
+            System.out.println(key);   
+        }
