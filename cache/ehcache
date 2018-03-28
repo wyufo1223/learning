@@ -1,0 +1,26 @@
+1 pom
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>${hibernate.version}</version>
+</dependency>
+
+2 开启 hibernate 二级缓存
+<property name="hibernate.cache.use_second_level_cache">true</property>
+<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+
+3 ehcache配置
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        />
+</ehcache>
+
+4
+<cache usage="read-only" />
